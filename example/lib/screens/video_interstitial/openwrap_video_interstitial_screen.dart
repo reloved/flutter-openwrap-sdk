@@ -86,7 +86,7 @@ class _OpenWrapVideoInterstitialScreen
           },
           child: const Icon(Icons.arrow_back),
         ),
-        title: const Text('Video Interstitial'),
+        title: const Text('Interstitial Video'),
       ),
       body: Container(
         color: Colors.grey[200],

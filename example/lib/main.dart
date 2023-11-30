@@ -11,7 +11,6 @@ void main() {
 const List<String> adType = [
   'Banner',
   'MREC Display',
-  'MREC Video',
   'Interstitial Display',
   'Interstitial Video',
   'Rewarded'
@@ -103,17 +102,10 @@ class SubRow extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => const OpenWrapMRECVideoScreen()),
-            );
-            break;
-          case 3:
-            Navigator.push(
-              context,
-              MaterialPageRoute(
                   builder: (context) => const OpenWrapInterstitialScreen()),
             );
             break;
-          case 4:
+          case 3:
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -121,7 +113,7 @@ class SubRow extends StatelessWidget {
                       const OpenWrapVideoInterstitialScreen()),
             );
             break;
-          case 5:
+          case 4:
             Navigator.push(
               context,
               MaterialPageRoute(
