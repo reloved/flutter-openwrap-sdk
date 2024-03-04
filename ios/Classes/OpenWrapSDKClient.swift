@@ -132,9 +132,6 @@ class OpenWrapSDKClient: NSObject {
         if let region = userInfo["region"] as? String {
             uInfo.region = region
         }
-        if let country = userInfo["country"] as? String {
-            uInfo.country = country
-        }
         if let zip = userInfo["zip"] as? String {
             uInfo.zip = zip
         }

@@ -129,10 +129,6 @@ object OpenWrapSDKClient {
         POBUserInfo.Gender.values().getOrElse(argument) { POBUserInfo.Gender.MALE })
     }
 
-    call.argument<String>("country")?.let {
-      userInfo.setCountry(it)
-    }
-
     call.argument<String>("city")?.let {
       userInfo.setCity(it)
     }

@@ -43,8 +43,6 @@ const String keyLurl = 'lurl';
 
 const String keyNurl = 'nurl';
 
-const String keyPartnerId = 'partnerId';
-
 const String keyPartnerName = 'partnerName';
 
 const String keyPrice = 'price';

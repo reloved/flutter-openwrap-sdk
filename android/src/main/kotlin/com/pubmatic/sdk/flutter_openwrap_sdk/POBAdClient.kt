@@ -108,7 +108,6 @@ abstract class POBAdClient(val adId: Int, protected val channel: MethodChannel) 
     bidMap["partnerName"] = bid?.partnerName
     bidMap["dealId"] = bid?.dealId
     bidMap["refreshInterval"] = bid?.refreshInterval
-    bidMap["partnerId"] = bid?.partnerId
     bidMap["targetingInfo"] = bid?.targetingInfo
     bidMap["rewardAmount"] = bid?.firstReward?.amount
     bidMap["rewardCurrencyType"] = bid?.firstReward?.currencyType

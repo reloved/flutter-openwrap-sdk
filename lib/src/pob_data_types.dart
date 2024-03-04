@@ -17,10 +17,6 @@ class POBUserInfo {
   /// FEMALE
   POBGender? gender;
 
-  /// Country code using ISO-3166-1-alpha-3.
-  /// For example: for United State Of America, you can use ("USA");
-  String? country;
-
   /// City of user
   /// For example: setCity("London");
   String? city;
@@ -359,9 +355,6 @@ class POBBid {
   /// Refresh interval in seconds
   late int refreshInterval;
 
-  /// OpenWrap partner Id of this bid
-  String? partnerId;
-
   /// Map of targeting information, that needs to be passed to ad server SDK.
   /// If the bid is not valid bid (check with its status) it returns null
   /// else returns valid bid targeting info map
@@ -393,7 +386,6 @@ class POBBid {
       ..grossPrice = POBUtils.cast(map?[keyGrossPrice]) ?? 0.0
       ..lurl = POBUtils.cast(map?[keyLurl])
       ..nurl = POBUtils.cast(map?[keyNurl])
-      ..partnerId = POBUtils.cast(map?[keyPartnerId])
       ..partnerName = POBUtils.cast(map?[keyPartnerName])
       ..price = POBUtils.cast(map?[keyPrice]) ?? 0.0
       ..refreshInterval = POBUtils.cast(map?[keyRefreshInterval]) ?? 0

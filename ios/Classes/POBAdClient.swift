@@ -37,7 +37,6 @@ class POBAdClient: NSObject {
         bidMap["partnerName"] = bid.partner
         bidMap["dealId"] = bid.dealId
         bidMap["refreshInterval"] = Int(bid.refreshInterval)
-        bidMap["partnerId"] = bid.pubmaticPartnerId
         bidMap["targetingInfo"] = bid.targetingInfo()
         bidMap["rewardAmount"] = bid.reward()?.amount.intValue
         bidMap["rewardCurrencyType"] = bid.reward()?.currencyType

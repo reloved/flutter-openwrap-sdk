@@ -150,7 +150,6 @@ class OpenWrapSDK {
           argument: <String, dynamic>{
             'birthYear': userInfo.birthYear,
             'gender': userInfo.gender?.index,
-            'country': userInfo.country,
             'city': userInfo.city,
             'metro': userInfo.metro,
             'zip': userInfo.zip,

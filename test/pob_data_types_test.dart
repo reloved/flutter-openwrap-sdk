@@ -6,7 +6,6 @@ void main() {
     final userInfo = POBUserInfo();
     userInfo.birthYear = 2000;
     userInfo.city = 'Pune';
-    userInfo.country = 'India';
     userInfo.gender = POBGender.male;
     userInfo.metro = '501';
     userInfo.region = 'IN';
@@ -15,7 +14,6 @@ void main() {
 
     expect(userInfo.birthYear, 2000);
     expect(userInfo.city, 'Pune');
-    expect(userInfo.country, 'India');
     expect(userInfo.gender, POBGender.male);
     expect(userInfo.metro, '501');
     expect(userInfo.region, 'IN');
@@ -164,7 +162,6 @@ void main() {
         'partnerName': 'pubmatic',
         'dealId': 'deal_id',
         'refreshInterval': 60,
-        'partnerId': 'partner_id',
         'targetingInfo': {'a': '0', 'b': '1'},
         'rewardAmount': 50,
         'rewardCurrencyType': 'coin'
@@ -188,7 +185,6 @@ void main() {
       expect(bid.partnerName, 'pubmatic');
       expect(bid.dealId, 'deal_id');
       expect(bid.refreshInterval, 60);
-      expect(bid.partnerId, 'partner_id');
       expect(bid.targetingInfo, {'a': '0', 'b': '1'});
       expect(bid.rewardAmount, 50);
       expect(bid.rewardCurrencyType, 'coin');
