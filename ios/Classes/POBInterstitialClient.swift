@@ -114,4 +114,9 @@ class POBInterstitialClient: POBAdClient, POBInterstitialDelegate, POBInterstiti
     func interstitialDidFinishVideoPlayback(_ interstitial: POBInterstitial) {
         methodChannel?.invokeMethod("onVideoPlaybackCompleted", arguments: POBUtils.adIdArgs(adId: adId))
     }
+
+    // Notifies the delegate that the ad impression
+    func interstitialDidRecordImpression(_ interstitial: POBInterstitial) {
+        methodChannel?.invokeMethod("onAdImpression", arguments: POBUtils.adIdArgs(adId: adId))
+    }
 }

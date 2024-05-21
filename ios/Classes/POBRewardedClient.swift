@@ -119,4 +119,9 @@ class POBRewardedClient: POBAdClient, POBRewardedAdDelegate {
     func rewardedAdDidExpireAd(_ rewardedAd: POBRewardedAd) {
         methodChannel?.invokeMethod("onAdExpired", arguments: POBUtils.adIdArgs(adId: adId))
     }
+
+    // Notifies the delegate that the ad impression
+    func rewardedAdDidRecordImpression(_ rewardedAd: POBRewardedAd) {
+        methodChannel?.invokeMethod("onAdImpression", arguments: POBUtils.adIdArgs(adId: adId))
+    }
 }

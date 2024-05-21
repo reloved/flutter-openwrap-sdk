@@ -42,19 +42,16 @@ class POBBannerEventListener extends POBAdEventListener {
       required POBAdServerAdEvent onAdLeftApplication,
       required POBEventOpenWrapPartnerWin openWrapPartnerWin,
       required POBAdServerAdEvent onAdServerWin,
-      required this.onFailed,
-      required this.onAdServerImpressionRecorded})
+      required POBAdServerAdEvent onAdImpression,
+      required this.onFailed})
       : super(
             onAdClick: onAdClick,
             onAdClosed: onAdClosed,
             onAdLeftApplication: onAdLeftApplication,
             onAdOpened: onAdOpened,
             onOpenWrapPartnerWin: openWrapPartnerWin,
-            onAdServerWin: onAdServerWin);
-
-  /// Notifies OpenWrap SDK via OW SDK flutter plugin about ad server impression
-  /// record.
-  final POBAdServerAdEvent onAdServerImpressionRecorded;
+            onAdServerWin: onAdServerWin,
+            onAdImpression: onAdImpression);
 
   /// Handler should call this method to notify the OpenWrap SDK about any kind
   /// of loading error.

@@ -36,7 +36,7 @@ class _OpenWrapBannerScreenState extends State<OpenWrapBannerScreen> {
     OpenWrapSDK.setApplicationInfo(applicationInfo);
 
     // Initialise banner ad.
-    // For test IDs refer - https://community.pubmatic.com/display/IOPO/Test+and+debug+your+integration
+    // For test IDs refer - https://help.pubmatic.com/openwrap/docs/test-and-debug-your-integration-5#test-profileplacements
     _bannerAd = POBBannerAd(
         pubId: pubId,
         profileId: profileId,
@@ -110,4 +110,9 @@ class _BannerAdListener implements POBBannerAdListener {
   @override
   POBAdEvent<POBBannerAd>? get onAdClicked =>
       (POBBannerAd ad) => developer.log('$_tag: Ad Clicked');
+
+  /// Callback method Notifies that the banner impression occurred.
+  @override
+  POBAdEvent<POBBannerAd>? get onAdImpression =>
+      (POBBannerAd ad) => developer.log('$_tag: Ad Impression');
 }

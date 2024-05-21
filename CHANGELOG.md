@@ -1,3 +1,8 @@
+## 2.0.0
+* Supports the latest OpenWrap SDK:
+  * Android OpenWrap SDK version 3.5.0
+  * iOS OpenWrap SDK version 3.5.1
+
 ## 1.1.0
 * Supports the latest OpenWrap SDK:
   * Android OpenWrap SDK version 3.4.0

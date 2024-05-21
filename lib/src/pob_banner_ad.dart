@@ -199,6 +199,9 @@ class POBBannerAd extends POBAd {
       case 'onAdClicked':
         _listener?.onAdClicked?.call(this);
         break;
+      case 'onAdImpression':
+        _listener?.onAdImpression?.call(this);
+        break;
       case 'onAdFailed':
         _isAdLoaded = false;
         POBError error =
@@ -256,6 +259,9 @@ class _POBBannerWidgetState extends State<POBBannerWidget> {
       if (mounted) {
         setState(() {
           _adWidget = SizedBox(
+            // Assign UniqueKey to all the widgets so that each widget can be
+            // identified uniquely and removed from hierarchy at the time of refresh.
+            key: UniqueKey(),
             width: size.width.toDouble(),
             height: size.height.toDouble(),
 
@@ -318,6 +324,9 @@ class _POBBannerWidgetState extends State<POBBannerWidget> {
     // return platform specific views
     if (defaultTargetPlatform == TargetPlatform.android) {
       return PlatformViewLink(
+          // Assign UniqueKey to all the widgets so that each widget can be
+          // identified uniquely and removed from hierarchy at the time of refresh.
+          key: UniqueKey(),
           viewType: ad.tag,
           surfaceFactory: (context, controller) {
             return AndroidViewSurface(
@@ -343,6 +352,9 @@ class _POBBannerWidgetState extends State<POBBannerWidget> {
           });
     } else if (defaultTargetPlatform == TargetPlatform.iOS) {
       return UiKitView(
+        // Assign UniqueKey to all the widgets so that each widget can be
+        // identified uniquely and removed from hierarchy at the time of refresh.
+        key: UniqueKey(),
         viewType: ad.tag,
         layoutDirection: TextDirection.ltr,
         creationParams: ad.adIdMap,
@@ -363,13 +375,6 @@ class _POBBannerEventListenerImpl extends EventHandlerListener
   _POBBannerEventListenerImpl({required POBBannerAd ad})
       : _bannerAd = ad,
         super(ad: ad);
-
-  @override
-  POBAdServerAdEvent get onAdServerImpressionRecorded =>
-      () => openWrapMethodChannel.callPlatformMethodWithTag<void>(
-          tag: ad.tag,
-          methodName: '$eventHandlerTag#onAdServerImpressionRecorded',
-          argument: ad.adIdMap);
 
   @override
   POBAdServerAdEvent get onAdServerWin => () {
@@ -402,6 +407,7 @@ class POBBannerAdListener extends POBAdListener<POBBannerAd> {
     POBAdEvent<POBBannerAd>? onAdClicked,
     POBAdEvent<POBBannerAd>? onAdClosed,
     POBAdEvent<POBBannerAd>? onAdOpened,
+    POBAdEvent<POBBannerAd>? onAdImpression,
     this.onAdFailed,
   }) : super(
           onAdClicked: onAdClicked,
@@ -409,6 +415,7 @@ class POBBannerAdListener extends POBAdListener<POBBannerAd> {
           onAdOpened: onAdOpened,
           onAppLeaving: onAppLeaving,
           onAdReceived: onAdReceived,
+          onAdImpression: onAdImpression,
         );
 
   /// Notifies the listener of an [error] encountered while loading or rendering

@@ -81,6 +81,12 @@ class POBInterstitialEventHandlerClient(
         result.success(null)
       }
 
+      "onAdImpression" -> {
+        POBLog.info(TAG, "GAM interstitial recorded the impression")
+        eventListener?.onAdImpression()
+        result.success(null)
+      }
+
       "onFailedToLoad" -> {
         eventListener?.onFailedToLoad(
           POBError(

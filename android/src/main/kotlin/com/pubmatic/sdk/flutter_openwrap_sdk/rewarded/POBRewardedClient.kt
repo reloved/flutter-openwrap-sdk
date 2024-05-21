@@ -141,5 +141,9 @@ class POBRewardedClient(
       arguments["amount"] = reward.amount
       channel.invokeMethod("onReceiveReward", arguments)
     }
+
+    override fun onAdImpression(rewardedAd: POBRewardedAd) {
+      channel.invokeMethod("onAdImpression", POBUtils.getArgumentMap(adId))
+    }
   }
 }

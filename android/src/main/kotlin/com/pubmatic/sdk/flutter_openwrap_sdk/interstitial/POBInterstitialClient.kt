@@ -128,6 +128,10 @@ class POBInterstitialClient(
     override fun onAdExpired(ad: POBInterstitial) {
       channel.invokeMethod("onAdExpired", POBUtils.getArgumentMap(adId))
     }
+
+    override fun onAdImpression(ad: POBInterstitial) {
+      channel.invokeMethod("onAdImpression", POBUtils.getArgumentMap(adId))
+    }
   }
 
   /**

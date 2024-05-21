@@ -204,6 +204,10 @@ void main() {
       event.listener.onAdOpened.call();
       expect(testData['adId'], interstitial.adId);
       expect(methodCall, 'POBInterstitial#EventHandler#onAdOpened');
+
+      event.listener.onAdImpression.call();
+      expect(testData['adId'], interstitial.adId);
+      expect(methodCall, 'POBInterstitial#EventHandler#onAdImpression');
     });
 
     test('Event Handler request Ad', () {

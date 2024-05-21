@@ -38,7 +38,7 @@ class _OpenWrapInterstitialScreen extends State<OpenWrapInterstitialScreen> {
     OpenWrapSDK.setApplicationInfo(applicationInfo);
 
     // Initialise interstitial ad.
-    // For test IDs refer - https://community.pubmatic.com/display/IOPO/Test+and+debug+your+integration
+    // For test IDs refer - https://help.pubmatic.com/openwrap/docs/test-and-debug-your-integration-5#test-profileplacements
     _interstitial = POBInterstitial(
       pubId: pubId,
       profileId: profileId,
@@ -187,4 +187,9 @@ class _InterstitialListener implements POBInterstitialListener {
   @override
   POBAdEvent<POBInterstitial>? get onAdClicked =>
       (POBInterstitial ad) => developer.log('$_tag: onAdClicked');
+
+  /// Callback method notifies ad impression
+  @override
+  POBAdEvent<POBInterstitial>? get onAdImpression =>
+      (POBInterstitial ad) => developer.log('$_tag: onAdImpression');
 }

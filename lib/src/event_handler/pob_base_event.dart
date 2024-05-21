@@ -30,7 +30,8 @@ abstract class POBAdEventListener {
       required this.onAdOpened,
       required this.onAdLeftApplication,
       required this.onAdServerWin,
-      required this.onOpenWrapPartnerWin});
+      required this.onOpenWrapPartnerWin,
+      required this.onAdImpression});
 
   /// Call this when the ad server SDK informs about click happened on Ad.
   final POBAdServerAdEvent onAdClick;
@@ -52,4 +53,8 @@ abstract class POBAdEventListener {
   /// handler should call this method to notify the OpenWrap SDK about
   /// ad server SDK renders its own ad.
   final POBAdServerAdEvent onAdServerWin;
+
+  /// Notifies OpenWrap SDK via OW SDK flutter plugin about ad server impression
+  /// record.
+  final POBAdServerAdEvent onAdImpression;
 }

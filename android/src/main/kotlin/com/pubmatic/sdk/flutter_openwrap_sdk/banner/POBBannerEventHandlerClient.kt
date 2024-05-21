@@ -95,9 +95,9 @@ class POBBannerEventHandlerClient(
         result.success(null)
       }
 
-      "onAdServerImpressionRecorded" -> {
+      "onAdImpression" -> {
         POBLog.info(TAG, "GAM banner recorded the impression")
-        eventListener?.onAdServerImpressionRecorded()
+        eventListener?.onAdImpression()
         result.success(null)
       }
 

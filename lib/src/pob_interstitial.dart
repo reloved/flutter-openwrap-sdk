@@ -126,6 +126,9 @@ class POBInterstitial extends POBAd {
       case 'onAdExpired':
         _interstitialListener?.onAdExpired?.call(this);
         break;
+      case 'onAdImpression':
+        _interstitialListener?.onAdImpression?.call(this);
+        break;
       case 'onVideoPlaybackCompleted':
         _videoListener?.onVideoPlaybackCompleted(this);
         break;
@@ -193,6 +196,7 @@ class POBInterstitialListener extends POBAdListener<POBInterstitial> {
     POBAdEvent<POBInterstitial>? onAdClosed,
     POBAdEvent<POBInterstitial>? onAdClicked,
     POBAdEvent<POBInterstitial>? onAppLeaving,
+    POBAdEvent<POBInterstitial>? onAdImpression,
     this.onAdFailedToLoad,
     this.onAdFailedToShow,
     this.onAdExpired,
@@ -202,6 +206,7 @@ class POBInterstitialListener extends POBAdListener<POBInterstitial> {
           onAdOpened: onAdOpened,
           onAppLeaving: onAppLeaving,
           onAdReceived: onAdReceived,
+          onAdImpression: onAdImpression,
         );
 
   /// Notifies the listener of an error encountered while loading an ad.

@@ -131,35 +131,47 @@ class EventHandlerListener implements POBAdEventListener {
           tag: ad.tag,
           methodName: '$eventHandlerTag#onAdServerWin',
           argument: ad.adIdMap);
+
+  @override
+  POBAdServerAdEvent get onAdImpression =>
+      () => openWrapMethodChannel.callPlatformMethodWithTag<void>(
+          tag: ad.tag,
+          methodName: '$eventHandlerTag#onAdImpression',
+          argument: ad.adIdMap);
 }
 
 abstract class POBAdListener<T extends POBAd> {
   /// Notifies the listener that an ad has been received successfully.
   ///
-  /// [ad] The POBInterstitial instance invoking this method.
+  /// [ad] The Ad instance invoking this method.
   final POBAdEvent<T>? onAdReceived;
 
   /// Notifies the listener that a user interaction will open another app (e.g. Chrome browser),
   /// leaving the current app. To handle user clicks that open the landing page URL in the
   /// internal browser, use 'onAdClicked()' instead.
   ///
-  /// [ad] The POBInterstitial instance invoking this method.
+  /// [ad] The Ad instance invoking this method.
   final POBAdEvent<T>? onAppLeaving;
 
   /// Notifies that the OpenWrap view will open an ad on top of the current view.
   ///
-  /// [ad] The POBInterstitial instance invoking this method.
+  /// [ad] The Ad instance invoking this method.
   final POBAdEvent<T>? onAdOpened;
 
   /// Notifies that the OpenWrap view has closed the ad on top of the current view.
   ///
-  /// [ad] The POBInterstitial instance invoking this method.
+  /// [ad] The Ad instance invoking this method.
   final POBAdEvent<T>? onAdClosed;
 
-  /// Notifies that the interstitial ad has been clicked
+  /// Notifies that the ad has been clicked
   ///
-  /// [ad] The POBInterstitial instance invoking this method.
+  /// [ad] The Ad instance invoking this method.
   final POBAdEvent<T>? onAdClicked;
+
+  /// Notifies that the impression has occured for the Ad instance
+  ///
+  /// [ad] The Ad instance invoking this method.
+  final POBAdEvent<T>? onAdImpression;
 
   @protected
   const POBAdListener({
@@ -168,5 +180,6 @@ abstract class POBAdListener<T extends POBAd> {
     required this.onAdOpened,
     required this.onAppLeaving,
     required this.onAdReceived,
+    required this.onAdImpression,
   });
 }

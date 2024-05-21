@@ -102,6 +102,9 @@ class POBRewardedAd extends POBAd {
       case 'onAdClicked':
         _rewardedAdListener?.onAdClicked?.call(this);
         break;
+      case 'onAdImpression':
+        _rewardedAdListener?.onAdImpression?.call(this);
+        break;
       case 'onAdFailedToLoad':
         POBError? error =
             POBUtils.convertMapToPOBError(POBUtils.cast(call.arguments));
@@ -132,6 +135,7 @@ class POBRewardedAdListener extends POBAdListener<POBRewardedAd> {
     POBAdEvent<POBRewardedAd>? onAdClosed,
     POBAdEvent<POBRewardedAd>? onAdClicked,
     POBAdEvent<POBRewardedAd>? onAppLeaving,
+    POBAdEvent<POBRewardedAd>? onAdImpression,
     this.onAdFailedToLoad,
     this.onAdFailedToShow,
     this.onAdExpired,
@@ -142,6 +146,7 @@ class POBRewardedAdListener extends POBAdListener<POBRewardedAd> {
           onAdOpened: onAdOpened,
           onAppLeaving: onAppLeaving,
           onAdReceived: onAdReceived,
+          onAdImpression: onAdImpression,
         );
 
   /// Notifies the listener of an error encountered while loading an ad.

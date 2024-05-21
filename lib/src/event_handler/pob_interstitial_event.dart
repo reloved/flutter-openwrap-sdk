@@ -33,6 +33,7 @@ class POBInterstitialEventListener extends POBAdEventListener {
     required POBAdServerAdEvent onAdLeftApplication,
     required POBEventOpenWrapPartnerWin onOpenWrapPartnerWin,
     required POBAdServerAdEvent onAdServerWin,
+    required POBAdServerAdEvent onAdImpression,
     required this.onFailedToLoad,
     required this.onAdExpired,
     required this.onFailedToShow,
@@ -42,7 +43,8 @@ class POBInterstitialEventListener extends POBAdEventListener {
             onAdLeftApplication: onAdLeftApplication,
             onAdOpened: onAdOpened,
             onOpenWrapPartnerWin: onOpenWrapPartnerWin,
-            onAdServerWin: onAdServerWin);
+            onAdServerWin: onAdServerWin,
+            onAdImpression: onAdImpression);
 
   /// Handler should call this method to notify the OpenWrap SDK about any kind
   /// of load time error.

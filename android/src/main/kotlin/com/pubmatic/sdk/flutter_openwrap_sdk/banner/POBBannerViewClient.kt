@@ -139,5 +139,9 @@ class POBBannerViewClient(
     override fun onAdClicked(bannerView: POBBannerView) {
       channel.invokeMethod("onAdClicked", POBUtils.getArgumentMap(adId))
     }
+
+    override fun onAdImpression(view: POBBannerView) {
+      channel.invokeMethod("onAdImpression", POBUtils.getArgumentMap(adId))
+    }
   }
 }

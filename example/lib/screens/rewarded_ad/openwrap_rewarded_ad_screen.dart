@@ -37,7 +37,7 @@ class _OpenWrapRewardedAdScreen extends State<OpenWrapRewardedAdScreen> {
     OpenWrapSDK.setApplicationInfo(applicationInfo);
 
     // Initialise rewardedAd.
-    // For test IDs refer - https://community.pubmatic.com/display/IOPO/Test+and+debug+your+integration
+    // For test IDs refer - https://help.pubmatic.com/openwrap/docs/test-and-debug-your-integration-5#test-profileplacements
     _rewarded = POBRewardedAd(
       pubId: pubId,
       profileId: videoProfileId,
@@ -161,12 +161,12 @@ class _RewardedAdListener implements POBRewardedAdListener {
       (POBRewardedAd ad, POBError error) =>
           developer.log('$_tag: Rewarded Ad: Ad failed with error $error');
 
-  /// Callback method notifies that the interstitial ad will be presented as a modal on top of the current view controller
+  /// Callback method notifies that the rewarded ad will be presented as a modal on top of the current view controller
   @override
   POBAdEvent<POBRewardedAd>? get onAdOpened =>
       (POBRewardedAd ad) => developer.log('$_tag: Rewarded Ad : Ad Opened');
 
-  /// Callback method notifies that the interstitial ad has been animated off the screen.
+  /// Callback method notifies that the rewarded ad has been animated off the screen.
   @override
   POBAdEvent<POBRewardedAd>? get onAdClosed =>
       (POBRewardedAd ad) => developer.log('$_tag: Rewarded Ad : Ad Closed');
@@ -186,8 +186,14 @@ class _RewardedAdListener implements POBRewardedAdListener {
   POBAdEvent<POBRewardedAd>? get onAdClicked =>
       (POBRewardedAd ad) => developer.log('$_tag: Rewarded Ad : Ad Clicked');
 
+  /// Callback method notifies rewarded ad reward received.
   @override
   POBAdEventReward<POBRewardedAd>? get onReceiveReward =>
       (POBRewardedAd ad, POBReward reward) => developer.log(
           '$_tag: Rewarded Ad : Ad should reward - ${reward.amount}(${reward.currencyType})');
+
+  /// Callback method notifies that the rewarded ad impression occurred.
+  @override
+  POBAdEvent<POBRewardedAd>? get onAdImpression =>
+      (POBRewardedAd ad) => developer.log('$_tag: Rewarded Ad : Ad Impression');
 }

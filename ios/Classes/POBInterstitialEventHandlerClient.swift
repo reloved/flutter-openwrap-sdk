@@ -84,6 +84,9 @@ class POBInterstitialEventHandlerClient: NSObject, POBFLTInterstitialEvent {
         case "onAdLeftApplication":
             eventDelegate?.willLeaveApp()
             result(nil)
+        case "onAdImpression":
+            eventDelegate?.adServerAdDidRecordImpression()
+            result(nil)
         case "onFailedToLoad":
             let values = call.arguments as? [String: Any]
             eventDelegate?.failedToLoadWithError(POBUtils.error(from: values))

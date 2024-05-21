@@ -72,8 +72,8 @@ class POBBannerEventHandlerClient: NSObject, POBFLTBannerEvent {
             adServerWin = true
             eventDelegate?.adServerDidWin(UIView())
             result(nil)
-        case "onAdServerImpressionRecorded":
-            eventDelegate?.adServerAdViewdDidRecordImpression?()
+        case "onAdImpression":
+            eventDelegate?.adServerAdDidRecordImpression()
             result(nil)
         case "onFailed":
             let values = call.arguments as? [String: Any]

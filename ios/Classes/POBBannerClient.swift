@@ -120,4 +120,9 @@ class POBBannerClient: POBAdClient, POBBannerViewDelegate, FlutterPlatformView {
     func bannerViewDidClickAd(_ bannerView: POBBannerView) {
         methodChannel?.invokeMethod("onAdClicked", arguments: POBUtils.adIdArgs(adId: adId))
     }
+
+    // Notifies the delegate of ad impression
+    func bannerViewDidRecordImpression(_ bannerView: POBBannerView) {
+        methodChannel?.invokeMethod("onAdImpression", arguments: POBUtils.adIdArgs(adId: adId))
+    }
 }

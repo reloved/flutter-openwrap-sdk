@@ -152,6 +152,9 @@ void main() {
 
       bannerAd.onAdCallBack(const MethodCall('onAppLeaving'));
       expect('onAppLeaving', testData);
+
+      bannerAd.onAdCallBack(const MethodCall('onAdImpression'));
+      expect('onAdImpression', testData);
     });
   });
 
@@ -178,10 +181,9 @@ void main() {
           profileId: 1165,
           adUnitId: "OpenWrapBannerAdUnit",
           bannerEvent: event);
-      event.listener.onAdServerImpressionRecorded.call();
+      event.listener.onAdImpression.call();
       expect(testData['adId'], bannerAd.adId);
-      expect(methodCallName,
-          'POBBannerView#EventHandler#onAdServerImpressionRecorded');
+      expect(methodCallName, 'POBBannerView#EventHandler#onAdImpression');
 
       event.listener.onAdServerWin.call();
       expect(testData['adId'], bannerAd.adId);
@@ -212,6 +214,10 @@ void main() {
       event.listener.onAdOpened.call();
       expect(testData['adId'], bannerAd.adId);
       expect(methodCallName, 'POBBannerView#EventHandler#onAdOpened');
+
+      event.listener.onAdImpression.call();
+      expect(testData['adId'], bannerAd.adId);
+      expect(methodCallName, 'POBBannerView#EventHandler#onAdImpression');
     });
 
     test('Event Handler getCreativeSize api test case', () async {
@@ -268,6 +274,10 @@ class POBBannerAdListenerImpl implements POBBannerAdListener {
   @override
   POBAdEvent<POBBannerAd>? get onAppLeaving =>
       (POBBannerAd ad) => testData = 'onAppLeaving';
+
+  @override
+  POBAdEvent<POBBannerAd>? get onAdImpression =>
+      (POBBannerAd ad) => testData = 'onAdImpression';
 }
 
 class DummyBannerEvent implements POBBannerEvent {
