@@ -30,6 +30,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdk 33
 
+    namespace 'com.pubmatic.sdk.flutter_openwrap_sdk'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
