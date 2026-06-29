@@ -15,7 +15,11 @@ Pod::Spec.new do |s|
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
-  s.dependency 'OpenWrapSDK','~> 4.10.0'
+  # OpenWrapSDK 4.10.x has an over-release (zombie) crash in
+  # POBCacheManager -fetchDeviceIPFromResponse: on the NSURLSession-delegate
+  # thread. Force a post-fix 4.x (4.11.0+). Exclude 5.x: native major bump,
+  # the plugin bridge below was written against the 4.x native API.
+  s.dependency 'OpenWrapSDK', '>= 4.11.0', '< 5.0.0'
   s.static_framework = true
   s.platform = :ios, '12.0'
 
