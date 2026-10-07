@@ -178,8 +178,8 @@ extension UIApplication {
 
     static func presentedViewController() -> UIViewController {
         var presentedVC = rootViewController()
-        while presentedVC.presentedViewController != nil {
-            presentedVC = presentedVC.presentedViewController!
+        while let next = presentedVC.presentedViewController {
+            presentedVC = next
         }
         return presentedVC
     }
@@ -191,20 +191,52 @@ extension UIApplication {
     static func keyWindow() -> UIWindow {
         let app = UIApplication.shared
 
-        if let window = app.delegate?.window {
-            return window!
+        // MARK: - Resolve the key UIWindow for presenting full-screen ads
+        //
+        // Interstitial and rewarded ads call `presentedViewController()`, which needs the
+        // active key window. The lookup strategy depends on the app's iOS lifecycle:
+        //
+        // 1. Legacy Flutter apps (pre-UIScene): `AppDelegate.window` is set by
+        //    `FlutterAppDelegate` during launch.
+        // 2. UIScene Flutter apps (Flutter 3.38+ with `FlutterSceneDelegate`): the window is
+        //    owned by the scene delegate, so `AppDelegate.window` is nil. Use
+        //    `UIApplication.connectedScenes` instead.
+
+        // Legacy AppDelegate lifecycle (pre-UIScene / classic FlutterAppDelegate).
+        // Fast path for apps that have not adopted `UIApplicationSceneManifest`.
+        if let window = app.delegate?.window ?? nil {
+            return window
         }
 
-        // filter visible windows
-        // app.windows will be deprecated in iOS 15
-        let windows = app.windows.filter({ (window) -> Bool in
-            return window.isKeyWindow || window.isHidden == false
-        })
-        // find top window
-        if let keyWindow = windows.max(by: { $0.windowLevel > $1.windowLevel}) {
-            return keyWindow
+        // UIScene lifecycle (Flutter 3.38+ / FlutterSceneDelegate) — iOS 13+
+        if #available(iOS 13.0, *) {
+            // Prefer the scene's key window — the window currently receiving user events.
+            let sceneWindow = app.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .first { $0.isKeyWindow }
+            if let sceneWindow = sceneWindow {
+                return sceneWindow
+            }
+
+            // No key window yet (e.g. early in scene connection). Pick the topmost visible
+            // window across all connected scenes so ad presentation still has a valid anchor.
+            let visibleWindows = app.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .flatMap { $0.windows }
+                .filter { !$0.isHidden }
+            if let topWindow = visibleWindows.max(by: { $0.windowLevel < $1.windowLevel }) {
+                return topWindow
+            }
         }
-        // return root VC below iOS 13
+
+        // Pre-iOS 13 fallback: scan `UIApplication.windows` before scene APIs existed.
+        // Also covers edge cases where scene lookup returns nothing.
+        let windows = app.windows.filter { $0.isKeyWindow || !$0.isHidden }
+        if let topWindow = windows.max(by: { $0.windowLevel < $1.windowLevel }) {
+            return topWindow
+        }
+
         return app.keyWindow!
     }
 }
