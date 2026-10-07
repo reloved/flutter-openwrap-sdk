@@ -10,6 +10,7 @@ gradlew.bat
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
 key.properties
 **/*.keystore
+!app/example-debug.keystore
 **/*.jks
 
 # VS Code

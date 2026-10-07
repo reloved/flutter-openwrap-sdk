@@ -1,6 +1,6 @@
 name: flutter_openwrap_sdk
 description: Flutter OpenWrap SDK plugin to support PubMatic's OpenWrap SDK.
-version: 3.0.0
+version: 3.0.1
 repository: https://github.com/PubMatic/flutter-openwrap-sdk
 homepage: https://help.pubmatic.com/openwrap/docs/about-openwrap-sdk-flutter-plugin
 

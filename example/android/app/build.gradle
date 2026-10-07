@@ -27,6 +27,15 @@ android {
     namespace "com.pubmatic.sdk.flutter_openwrap_sdk_example"
     compileSdk 35
 
+    signingConfigs {
+        debug {
+            storeFile file('example-debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
