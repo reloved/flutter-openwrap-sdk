@@ -38,6 +38,11 @@ class POBBannerAd extends POBAd {
   /// Reference of state class to update the adwidget internally.
   _POBBannerWidgetState? _widgetState;
 
+  /// Whether to keep the (empty) OpenWrap native view mounted under the ad server
+  /// view when the ad server wins. OpenWrap only auto-refreshes while its view is on
+  /// screen, so disable this only when OpenWrap refresh is off for the profile.
+  bool _keepOpenWrapViewOnAdServerWin = true;
+
   /// Initializes and returns newly allocated banner object for supporting
   /// `OpenWrap only configuration`.
   ///
@@ -66,17 +71,22 @@ class POBBannerAd extends POBAd {
   /// [profileId] Profile ID of an ad tag
   /// [adUnitId] Ad unit id used to identify unique placement on screen
   /// [bannerEvent] Valid instance of class implementing [POBBannerEvent]
+  /// [keepOpenWrapViewOnAdServerWin] keeps the empty OpenWrap native view mounted
+  /// under the ad server view when the ad server wins (needed for OpenWrap
+  /// auto-refresh). Pass false to render a single platform view in that case.
   POBBannerAd.eventHandler(
       {required String pubId,
       required int profileId,
       required String adUnitId,
-      required POBBannerEvent bannerEvent})
+      required POBBannerEvent bannerEvent,
+      bool keepOpenWrapViewOnAdServerWin = true})
       : super(
             adUnitId: adUnitId,
             profileId: profileId,
             pubId: pubId,
             tag: tagPOBBannerView) {
     _init();
+    _keepOpenWrapViewOnAdServerWin = keepOpenWrapViewOnAdServerWin;
     _eventHandler = bannerEvent;
     _eventHandler?.setEventListener(_POBBannerEventListenerImpl(ad: this));
     final sizes = _eventHandler?.requestedAdSizes();
@@ -282,6 +292,8 @@ class _POBBannerWidgetState extends State<POBBannerWidget> {
             // OpenWrap or Ad server sdk, based on the integration type.
             child: ad._eventHandler == null
                 ? _getOpenWrapWidget(ad)
+                : ad._isAdServerWin && !ad._keepOpenWrapViewOnAdServerWin
+                ? ad._eventHandler!.getAdServerWidget()
                 : Stack(
                     children: <Widget>[
                       ad._isAdServerWin
