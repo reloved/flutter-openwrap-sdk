@@ -376,7 +376,7 @@ class POBBid {
   /// Private constructor
   POBBid._();
 
-  /// Named constructor that creates and returns [POBBid] using Map<Object?, Object?>
+  /// Named constructor that creates and returns [POBBid] using `Map<Object?, Object?>`
   static POBBid fromMap(final Map<Object?, Object?>? map) {
     POBBid bid = POBBid._()
       ..bidId = POBUtils.cast(map?[keyBidId])

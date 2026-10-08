@@ -1,3 +1,6 @@
+## 3.0.1
+* Fixed an iOS crash for apps using Flutter SDK v3.38.5+ by updating `keyWindow()` to support the UIScene lifecycle introduced with `FlutterSceneDelegate`.
+
 ## 3.0.0
 * Supports the latest OpenWrapSDK:
   * Android OpenWrap SDK version 4.10.0

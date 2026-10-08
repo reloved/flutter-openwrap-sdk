@@ -3,7 +3,7 @@ import '../pob_data_types.dart';
 
 /// Common utility class.
 class POBUtils {
-  /// Converts Map<String, dynamic> to [POBError] object
+  /// Converts `Map<String, dynamic>` to [POBError] object
   static POBError convertMapToPOBError(final Map<Object?, Object?>? map) {
     int? errorCode = POBUtils.cast(map?[keyErrorCode]);
     String? message = POBUtils.cast(map?[keyErrorMessage]);
@@ -13,7 +13,7 @@ class POBUtils {
     );
   }
 
-  /// Converts Map<String, dynamic> to [POBReward] object
+  /// Converts `Map<String, dynamic>` to [POBReward] object
   static POBReward convertMapToPOBReward(final Map<Object?, Object?>? map) {
     int? amount = POBUtils.cast<int>(map?['amount']);
     String? currencyType = POBUtils.cast<String>(map?['currencyType']);
@@ -60,7 +60,7 @@ class POBUtils {
     return impressionMap;
   }
 
-  /// Converts Map<Object?, Object?> to Map<String, String>.
+  /// Converts `Map<Object?, Object?>` to `Map<String, String>`.
   static Map<String, String>? convertMapOfObjectToMapOfString(
       Map<Object?, Object?>? map) {
     if (map == null || map.isEmpty) {
@@ -75,7 +75,7 @@ class POBUtils {
     return data;
   }
 
-  /// Converts Map<String, dynamic> to [POBAdSize] object
+  /// Converts `Map<String, dynamic>` to [POBAdSize] object
   static POBAdSize convertMapToPOBAdSize(final Map<Object?, Object?>? map) {
     int? width = POBUtils.cast<int>(map?['w']);
     int? height = POBUtils.cast<int>(map?['h']);
@@ -85,7 +85,7 @@ class POBUtils {
   /// Casts given object into expected type. Returns null otherwise
   static T? cast<T>(Object? object) => object is T ? object : null;
 
-  /// Helps to convert the Android JSON and iOS Dictionary to Map<String, dynamic>
+  /// Helps to convert the Android JSON and iOS Dictionary to `Map<String, dynamic>`
   static Map<String, dynamic>? convertToStringDynamicMap(dynamic value) {
     if (value == null) return null;
     if (value is! Map) return null;
